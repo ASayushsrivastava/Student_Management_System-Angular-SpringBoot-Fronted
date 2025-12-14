@@ -1,0 +1,22 @@
+<h2>Students</h2>
+
+<table border="1" cellpadding="8">
+  <tr>
+    <th>First</th>
+    <th>Last</th>
+    <th>Email</th>
+    <th>Age</th>
+    <th>Actions</th>
+  </tr>
+
+  <tr *ngFor="let s of students">
+    <td>{{ s.firstName }}</td>
+    <td>{{ s.lastName }}</td>
+    <td>{{ s.email }}</td>
+    <td>{{ s.age }}</td>
+    <td>
+      <button (click)="editStudent(s.id!)">Edit</button>
+      <button (click)="deleteStudent(s.id!)">Delete</button>
+    </td>
+  </tr>
+</table>

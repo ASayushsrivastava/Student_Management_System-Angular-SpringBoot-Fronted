@@ -1,0 +1,17 @@
+<h2>{{ isEdit ? 'Edit Student' : 'Add Student' }}</h2>
+
+<form (ngSubmit)="submit()">
+  <label>First Name</label><br />
+  <input [(ngModel)]="student.firstName" name="firstName" required /><br /><br />
+
+  <label>Last Name</label><br />
+  <input [(ngModel)]="student.lastName" name="lastName" required /><br /><br />
+
+  <label>Email</label><br />
+  <input [(ngModel)]="student.email" name="email" required /><br /><br />
+
+  <label>Age</label><br />
+  <input type="number" [(ngModel)]="student.age" name="age" required /><br /><br />
+
+  <button type="submit">{{ isEdit ? 'Update' : 'Create' }}</button>
+</form>
