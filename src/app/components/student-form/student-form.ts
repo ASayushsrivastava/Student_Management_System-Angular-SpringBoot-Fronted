@@ -1,8 +1,8 @@
-import { Component, inject } from '@angular/core';
-import { Student, StudentService } from '../../services/student.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Student, StudentService } from '../../services/student.service';
 
 @Component({
   selector: 'app-student-form',
@@ -16,34 +16,38 @@ export class StudentForm {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
 
-  student: Student = {
+  student = signal<Student>({
     firstName: '',
     lastName: '',
     email: '',
     age: 0,
-  };
+  });
 
-  isEdit = false;
-  studentId!: number;
+  isEdit = signal(false);
+  studentId = signal<number | null>(null);
 
-  ngOnInit(): void {
+  ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
-      this.isEdit = true;
-      this.studentId = +id;
-      this.studentService.getById(this.studentId).subscribe((data) => {
-        this.student = data;
-      });
-    }
+
+    if (!id) return;
+
+    this.isEdit.set(true);
+    this.studentId.set(+id);
+
+    this.studentService.getById(+id).subscribe((student) => {
+      this.student.set(student);
+    });
   }
 
   submit() {
-    const request = this.isEdit
-      ? this.studentService.update(this.studentId, this.student)
-      : this.studentService.create(this.student);
-
-    request.subscribe(() => {
-      this.router.navigate(['/students']);
-    });
+    if (this.isEdit()) {
+      this.studentService.update(this.studentId()!, this.student()).subscribe(() => {
+        this.router.navigate(['/students']);
+      });
+    } else {
+      this.studentService.create(this.student()).subscribe(() => {
+        this.router.navigate(['/students']);
+      });
+    }
   }
 }

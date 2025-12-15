@@ -1,17 +1,15 @@
-<h2>{{ isEdit ? 'Edit Student' : 'Add Student' }}</h2>
+<h2>{{ isEdit() ? 'Edit Student' : 'Add Student' }}</h2>
 
 <form (ngSubmit)="submit()">
-  <label>First Name</label><br />
-  <input [(ngModel)]="student.firstName" name="firstName" required /><br /><br />
+  <input type="text" name="firstName" [(ngModel)]="student().firstName" placeholder="First Name" />
 
-  <label>Last Name</label><br />
-  <input [(ngModel)]="student.lastName" name="lastName" required /><br /><br />
+  <input type="text" name="lastName" [(ngModel)]="student().lastName" placeholder="Last Name" />
 
-  <label>Email</label><br />
-  <input [(ngModel)]="student.email" name="email" required /><br /><br />
+  <input type="email" name="email" [(ngModel)]="student().email" placeholder="Email" />
 
-  <label>Age</label><br />
-  <input type="number" [(ngModel)]="student.age" name="age" required /><br /><br />
+  <input type="number" name="age" [(ngModel)]="student().age" placeholder="Age" />
 
-  <button type="submit">{{ isEdit ? 'Update' : 'Create' }}</button>
+  <button type="submit">
+    {{ isEdit() ? 'Update' : 'Create' }}
+  </button>
 </form>

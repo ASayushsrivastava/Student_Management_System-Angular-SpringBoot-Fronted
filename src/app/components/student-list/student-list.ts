@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { Student, StudentService } from '../../services/student.service';
 import { Router } from '@angular/router';
 
@@ -12,17 +12,13 @@ import { Router } from '@angular/router';
 })
 export class StudentList implements OnInit {
   private studentService = inject(StudentService);
-  private router = inject(Router);
+  public router = inject(Router);
 
-  students: Student[] = [];
+  students = signal<Student[]>([]);
 
-  ngOnInit(): void {
-    this.loadStudents();
-  }
-
-  loadStudents() {
+  ngOnInit() {
     this.studentService.getAll().subscribe((data) => {
-      this.students = data;
+      this.students.set(data);
     });
   }
 
@@ -31,10 +27,8 @@ export class StudentList implements OnInit {
   }
 
   deleteStudent(id: number) {
-    if (confirm('Are you sure?')) {
-      this.studentService.delete(id).subscribe(() => {
-        this.students = this.students.filter((s) => s.id !== id);
-      });
-    }
+    this.studentService.delete(id).subscribe(() => {
+      this.students.update((list) => list.filter((s) => s.id !== id));
+    });
   }
 }
