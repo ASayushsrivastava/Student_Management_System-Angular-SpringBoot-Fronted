@@ -1,0 +1,20 @@
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem 0;
+}
+
+nav a {
+  text-decoration: none;
+  font-weight: 500;
+  color: var(--gray-700);
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+nav a:hover {
+  background: color-mix(in oklch, var(--bright-blue) 12%, transparent);
+  color: var(--bright-blue);
+}

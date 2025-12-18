@@ -1,0 +1,9 @@
+<app-card>
+  <h2 card-title>Student Management Dashboard</h2>
+
+  <div card-body class="dashboard-body">
+    <app-student-form (saved)="refreshList()"></app-student-form>
+    <div class="divider"></div>
+    <app-student-list></app-student-list>
+  </div>
+</app-card>

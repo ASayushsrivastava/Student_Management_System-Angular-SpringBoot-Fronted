@@ -33,7 +33,9 @@ export class StudentService {
     return this.http.put<Student>(`${this.url}/${id}`, student);
   }
 
-  delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.url}/${id}`);
+  delete(id: number): Observable<string> {
+    return this.http.delete(`${this.url}/${id}`, {
+      responseType: 'text',
+    });
   }
 }

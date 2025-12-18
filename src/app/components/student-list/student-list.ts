@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, DoCheck, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { Student, StudentService } from '../../services/student.service';
 import { Router } from '@angular/router';
 
@@ -10,14 +10,28 @@ import { Router } from '@angular/router';
   templateUrl: './student-list.html',
   styleUrl: './student-list.css',
 })
-export class StudentList implements OnInit {
-  private studentService = inject(StudentService);
-  public router = inject(Router);
+export class StudentList implements OnInit, DoCheck, OnDestroy {
+  private service = inject(StudentService);
+  private router = inject(Router);
 
   students = signal<Student[]>([]);
+  selectedId = signal<number | null>(null);
 
   ngOnInit() {
-    this.studentService.getAll().subscribe((data) => {
+    console.log('StudentList → ngOnInit');
+    this.loadStudents();
+  }
+
+  ngDoCheck() {
+    console.log('StudentList → ngDoCheck');
+  }
+
+  ngOnDestroy() {
+    console.log('StudentList → ngOnDestroy');
+  }
+
+  loadStudents() {
+    this.service.getAll().subscribe((data) => {
       this.students.set(data);
     });
   }
@@ -27,8 +41,12 @@ export class StudentList implements OnInit {
   }
 
   deleteStudent(id: number) {
-    this.studentService.delete(id).subscribe(() => {
+    this.service.delete(id).subscribe(() => {
       this.students.update((list) => list.filter((s) => s.id !== id));
     });
+  }
+
+  selectRow(id: number) {
+    this.selectedId.set(id);
   }
 }

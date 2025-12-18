@@ -1,4 +1,4 @@
-<h2>Students</h2>
+<h3>Students</h3>
 
 <table border="1" cellpadding="8">
   <tr>
@@ -10,7 +10,7 @@
   </tr>
 
   @for (s of students(); track s.id) {
-  <tr>
+  <tr (click)="selectRow(s.id!)" [style.background]="selectedId() === s.id ? '#e0f2fe' : ''">
     <td>{{ s.firstName }}</td>
     <td>{{ s.lastName }}</td>
     <td>{{ s.email }}</td>
@@ -21,6 +21,6 @@
     </td>
   </tr>
   } @empty {
-  <p>There are no elements.</p>
+  <p>No students found</p>
   }
 </table>

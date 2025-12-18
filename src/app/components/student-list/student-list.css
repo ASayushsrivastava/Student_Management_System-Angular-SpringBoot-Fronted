@@ -1,0 +1,44 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+th {
+  text-align: left;
+  padding: 0.6rem;
+  color: var(--gray-700);
+  border-bottom: 1px solid var(--gray-400);
+}
+
+td {
+  padding: 0.6rem;
+  border-bottom: 1px solid color-mix(in oklch, var(--gray-400) 40%, transparent);
+}
+
+tr {
+  transition: background 0.2s ease;
+}
+
+tr:hover {
+  background: color-mix(in oklch, var(--bright-blue) 6%, transparent);
+}
+
+button {
+  padding: 0.35rem 0.7rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.75rem;
+  margin-right: 0.25rem;
+}
+
+button:first-child {
+  background: color-mix(in oklch, var(--bright-blue) 20%, transparent);
+  color: var(--bright-blue);
+}
+
+button:last-child {
+  background: color-mix(in oklch, var(--hot-red) 20%, transparent);
+  color: var(--hot-red);
+}
