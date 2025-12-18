@@ -2,7 +2,8 @@ import { Component, EventEmitter, inject, OnDestroy, OnInit, Output, signal } fr
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Student, StudentService } from '../../services/student.service';
+import { StudentService } from '../../services/student.service';
+import { Student } from '../../models/student.model';
 
 @Component({
   selector: 'app-student-form',
