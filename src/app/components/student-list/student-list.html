@@ -2,6 +2,10 @@
   <div class="list-header">
     <h3 class="list-title">Students</h3>
     <span class="list-count">{{ students().length }} total</span>
+    <select title="sort" class="sort-select" (change)="sortBy.set($any($event.target).value)">
+      <option value="name">Sort by Name</option>
+      <option value="age">Sort by Age</option>
+    </select>
   </div>
 
   <table>
@@ -16,7 +20,7 @@
     </thead>
 
     <tbody>
-      @for (s of students(); track s.id) {
+      @for (s of sortedStudents(); track s.id) {
       <tr
         (click)="selectRow(s.id!)"
         [class.active]="selectedId() === s.id"

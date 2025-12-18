@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, DoCheck, inject, OnDestroy, OnInit, signal } from '@angular/core';
+import { Component, computed, DoCheck, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { Student, StudentService } from '../../services/student.service';
 import { Router } from '@angular/router';
 
@@ -16,6 +16,8 @@ export class StudentList implements OnInit, DoCheck, OnDestroy {
 
   students = signal<Student[]>([]);
   selectedId = signal<number | null>(null);
+
+  sortBy = signal<'name' | 'age'>('name');
 
   deletingId = signal<number | null>(null);
 
@@ -56,4 +58,13 @@ export class StudentList implements OnInit, DoCheck, OnDestroy {
   selectRow(id: number) {
     this.selectedId.set(id);
   }
+  sortedStudents = computed(() => {
+    const data = [...this.students()];
+
+    if (this.sortBy() === 'name') {
+      return data.sort((a, b) => a.firstName.localeCompare(b.firstName));
+    }
+
+    return data.sort((a, b) => a.age - b.age);
+  });
 }

@@ -114,3 +114,12 @@ button:hover {
   background: color-mix(in oklch, var(--bright-blue) 12%, transparent);
   color: var(--bright-blue);
 }
+
+.sort-select {
+  padding: 0.35rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid var(--gray-400);
+  font-size: 0.75rem;
+  background: white;
+  color: var(--gray-700);
+}
