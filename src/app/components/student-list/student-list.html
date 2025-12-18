@@ -1,26 +1,43 @@
-<h3>Students</h3>
+<div class="list-container">
+  <div class="list-header">
+    <h3 class="list-title">Students</h3>
+    <span class="list-count">{{ students().length }} total</span>
+  </div>
 
-<table border="1" cellpadding="8">
-  <tr>
-    <th>First</th>
-    <th>Last</th>
-    <th>Email</th>
-    <th>Age</th>
-    <th>Actions</th>
-  </tr>
+  <table>
+    <thead>
+      <tr>
+        <th>First</th>
+        <th>Last</th>
+        <th>Email</th>
+        <th>Age</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
 
-  @for (s of students(); track s.id) {
-  <tr (click)="selectRow(s.id!)" [style.background]="selectedId() === s.id ? '#e0f2fe' : ''">
-    <td>{{ s.firstName }}</td>
-    <td>{{ s.lastName }}</td>
-    <td>{{ s.email }}</td>
-    <td>{{ s.age }}</td>
-    <td>
-      <button (click)="editStudent(s.id!)">Edit</button>
-      <button (click)="deleteStudent(s.id!)">Delete</button>
-    </td>
-  </tr>
-  } @empty {
-  <p>No students found</p>
-  }
-</table>
+    <tbody>
+      @for (s of students(); track s.id) {
+      <tr
+        (click)="selectRow(s.id!)"
+        [class.active]="selectedId() === s.id"
+        [class.deleting]="deletingId() === s.id"
+      >
+        <td>{{ s.firstName }}</td>
+        <td>{{ s.lastName }}</td>
+        <td class="email">{{ s.email }}</td>
+        <td>
+          <span class="age-pill">{{ s.age }}</span>
+        </td>
+        <td class="actions">
+          <button class="edit" (click)="editStudent(s.id!)">Edit</button>
+          <button class="delete" (click)="deleteStudent(s.id!)">Delete</button>
+        </td>
+      </tr>
+      } @empty {
+      <tr>
+        <td colspan="5" class="empty">No students found</td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>

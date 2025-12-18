@@ -1,44 +1,116 @@
 table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
 }
 
-th {
+thead th {
   text-align: left;
-  padding: 0.6rem;
+  padding: 0.65rem;
+  font-weight: 600;
   color: var(--gray-700);
   border-bottom: 1px solid var(--gray-400);
 }
 
+tbody tr {
+  transition: background 0.2s ease, transform 0.15s ease;
+  cursor: pointer;
+}
+
+tr.deleting {
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+tbody tr:nth-child(even) {
+  background: color-mix(in oklch, var(--gray-400) 6%, transparent);
+}
+
+tbody tr:hover {
+  background: color-mix(in oklch, var(--bright-blue) 8%, transparent);
+}
+
+tbody tr.active {
+  background: color-mix(in oklch, var(--bright-blue) 18%, transparent);
+}
+
 td {
   padding: 0.6rem;
-  border-bottom: 1px solid color-mix(in oklch, var(--gray-400) 40%, transparent);
+  border-bottom: 1px solid color-mix(in oklch, var(--gray-400) 35%, transparent);
 }
 
-tr {
-  transition: background 0.2s ease;
+.email {
+  color: var(--gray-700);
+  font-size: 0.8rem;
 }
 
-tr:hover {
-  background: color-mix(in oklch, var(--bright-blue) 6%, transparent);
+.age-pill {
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  background: color-mix(in oklch, var(--electric-violet) 15%, transparent);
+  color: var(--electric-violet);
+}
+
+.actions {
+  display: flex;
+  gap: 0.4rem;
 }
 
 button {
-  padding: 0.35rem 0.7rem;
-  border-radius: 8px;
   border: none;
+  border-radius: 999px;
+  padding: 0.25rem 0.7rem;
+  font-size: 0.7rem;
   cursor: pointer;
-  font-size: 0.75rem;
-  margin-right: 0.25rem;
+  transition: background 0.2s ease, transform 0.15s ease;
 }
 
-button:first-child {
-  background: color-mix(in oklch, var(--bright-blue) 20%, transparent);
+button.edit {
+  background: color-mix(in oklch, var(--bright-blue) 18%, transparent);
   color: var(--bright-blue);
 }
 
-button:last-child {
-  background: color-mix(in oklch, var(--hot-red) 20%, transparent);
+button.delete {
+  background: color-mix(in oklch, var(--hot-red) 18%, transparent);
   color: var(--hot-red);
+}
+
+button:hover {
+  transform: translateY(-1px);
+}
+
+.empty {
+  text-align: center;
+  padding: 1rem;
+  color: var(--gray-700);
+}
+
+.list-container {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid color-mix(in oklch, var(--gray-400) 35%, transparent);
+}
+
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.list-title {
+  margin: 0;
+  color: var(--gray-900);
+}
+
+.list-count {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  background: color-mix(in oklch, var(--bright-blue) 12%, transparent);
+  color: var(--bright-blue);
 }

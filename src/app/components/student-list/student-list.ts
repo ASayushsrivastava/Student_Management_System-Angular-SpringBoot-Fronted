@@ -17,6 +17,8 @@ export class StudentList implements OnInit, DoCheck, OnDestroy {
   students = signal<Student[]>([]);
   selectedId = signal<number | null>(null);
 
+  deletingId = signal<number | null>(null);
+
   ngOnInit() {
     console.log('StudentList → ngOnInit');
     this.loadStudents();
@@ -41,9 +43,14 @@ export class StudentList implements OnInit, DoCheck, OnDestroy {
   }
 
   deleteStudent(id: number) {
-    this.service.delete(id).subscribe(() => {
-      this.students.update((list) => list.filter((s) => s.id !== id));
-    });
+    this.deletingId.set(id);
+
+    setTimeout(() => {
+      this.service.delete(id).subscribe(() => {
+        this.students.update((list) => list.filter((s) => s.id !== id));
+        this.deletingId.set(null);
+      });
+    }, 300);
   }
 
   selectRow(id: number) {
