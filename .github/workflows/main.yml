@@ -12,7 +12,7 @@ concurrency:
 env:
   PARENT_REPO: ASayushsrivastava/admiral_complete_17-01-26
   PARENT_BRANCH: main
-  SUBMODULE_PATH: angular/Student_Management_System-Angular-SpringBoot-Fronted
+  SUBMODULE_PATH: angular/Student_Management_System-Angular-SpringBoot-
 
 jobs:
   update-parent:
